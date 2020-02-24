@@ -35,7 +35,7 @@ class Ball {
 
     FixtureDef fd = FixtureDef();
     fd.density = 10;
-    fd.restitution = 1;
+    fd.restitution = 0;
     fd.friction = 0;
     fd.shape = shape;
     body.createFixtureFromFixtureDef(fd);
