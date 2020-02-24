@@ -6,6 +6,7 @@ import 'dart:async';
 import 'package:esense_flutter/esense.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   //Make sure flame is ready before we launch our game
   await setupFlame();
   var game = new BallFallGame();

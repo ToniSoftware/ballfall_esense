@@ -3,16 +3,16 @@ import 'package:box2d_flame/box2d.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 
-class MazeBallGame extends Game {
+class BallFallGame extends Game {
   //Needed for Box2D
   static const int WORLD_POOL_SIZE = 100;
   static const int WORLD_POOL_CONTAINER_SIZE = 10;
   //Main physic object -> our game world
   World world;
   //Zero vector -> no gravity
-  final Vector2 _gravity = Vector2.zero();
+  final Vector2 _gravity = Vector2(0, 0);
 
-  MazeBallGame(){
+  BallFallGame(){
     world = new World.withPool(_gravity,
         DefaultWorldPool(WORLD_POOL_SIZE, WORLD_POOL_CONTAINER_SIZE));
     initialize();
