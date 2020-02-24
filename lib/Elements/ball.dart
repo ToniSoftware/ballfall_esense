@@ -13,10 +13,12 @@ class Ball {
   //Draw class
   Paint paint;
   //Initial acceleration -> no movement as its (0,0)
-  Vector2 acceleration = Vector2(0, 0);
+  Vector2 acceleration = Vector2.zero();
+  double finalScale = 0;
 
-  //Generate the ball and physics behind
+  //Generate the ball and phisyc behind
   Ball(this.game, Vector2 position) {
+    finalScale = game.screenSize.width /  game.scale;
     shape = CircleShape(); //build in shape, just set the radius
     shape.p.setFrom(Vector2.zero());
     shape.radius = .1; //10cm ball
@@ -42,7 +44,9 @@ class Ball {
     //Link to the sensor using dart Stream
     gyroscopeEvents.listen((GyroscopeEvent event) {
       //Adding up the scaled sensor data to the current acceleration
-      acceleration.add(Vector2(event.y / sensorScale, event.x / sensorScale));
+      if(!game.pauseGame){
+        acceleration.add(Vector2(event.y / sensorScale, event.x / sensorScale));
+      }
     });
   }
   //Draw the ball
@@ -54,10 +58,16 @@ class Ball {
     c.drawCircle(Offset(0, 0), .1, paint);
     c.restore();
   }
-
-
+  bool over =false;
   void update(double t) {
     //Our ball has to move, every frame by its acceleration. If frame rates drop it will move slower...
     body.applyForceToCenter(acceleration);
+    
+    if (!over && !game.screenRect
+        .overlaps(Rect.fromLTWH(body.position.x * finalScale, body.position.y * finalScale, .1, .1))) {
+      body.linearVelocity = Vector2.zero();
+      over =true;
+      game.pop();
+    }
   }
 }
