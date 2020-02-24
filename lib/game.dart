@@ -46,7 +46,7 @@ class BallFallGame extends Game {
   //Main physic object -> our game world
   World world;
   //Zero vector -> no gravity
-  final Vector2 _gravity = Vector2.zero();
+  final Vector2 _gravity = Vector2(0, 1);
   //Scale factore for our world
   final int scale = 5;
   //Size of the screen from the resize event

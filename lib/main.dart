@@ -6,7 +6,7 @@ import 'dart:async';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-//TODO Keep screen active -> no sleep
+
 
 SharedPreferences sharedPrefs;
 

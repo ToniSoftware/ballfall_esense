@@ -13,7 +13,7 @@ class Ball {
   //Draw class
   Paint paint;
   //Initial acceleration -> no movement as its (0,0)
-  Vector2 acceleration = Vector2.zero();
+  Vector2 acceleration = Vector2(0,1);
   double finalScale = 0;
 
   //Generate the ball and phisyc behind

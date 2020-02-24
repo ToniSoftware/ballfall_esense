@@ -18,11 +18,11 @@ class Wall {
   Wall(this.game, Vector2 startPoint, Vector2 endPoint) {
     final scaleFactor = game.screenSize.width / game.scale;
     //Build the object as a vector2 list based on start and end
-    var shapAsVectorList = _buildShapVectorList(startPoint, endPoint);
+    var shapeAsVectorList = _buildShapeVectorList(startPoint, endPoint);
     //Box2D part
     shape = PolygonShape();
     //shape.setAsEdge(Vector2.zero(), scaleVectoreBy(endPoint,scaleFactor));
-    shape.set(shapAsVectorList, shapAsVectorList.length);
+    shape.set(shapeAsVectorList, shapeAsVectorList.length);
     BodyDef bd = BodyDef();
     bd.linearVelocity = Vector2.zero();
     bd.position = scaleVectoreBy(startPoint, scaleFactor);
@@ -40,30 +40,23 @@ class Wall {
     //Create a Path for drawing based on vecotor list, rquies a convert to Offset
     _path = Path();
     _path.addPolygon(
-        shapAsVectorList.map((vector) => Offset(vector.x, vector.y)).toList(),
+        shapeAsVectorList.map((vector) => Offset(vector.x, vector.y)).toList(),
         false);
     //Painter, white walls
     _paint = Paint();
     _paint.color = Color(0xffffffff);
   }
 
-  List<Vector2> _buildShapVectorList(Vector2 start, Vector2 end) {
+  List<Vector2> _buildShapeVectorList(Vector2 start, Vector2 end) {
     final scaleFactor = game.screenSize.width / game.scale;
     var result = new List<Vector2>();
     //Left side corner starts at (0,0) the canvas will be moved to start point
     result.add(Vector2.zero());
     //Vertical wall if start point Y is less then end point Y other wise horizontal wall
-    if (start.y < end.y) {
-      var endY = (start.y - end.y).abs();
-      result.add(scaleVectoreBy(Vector2(0, endY), scaleFactor));
-      result.add(scaleVectoreBy(Vector2(wallWidth, endY), scaleFactor));
-      result.add(scaleVectoreBy(Vector2(wallWidth, 0), scaleFactor));
-    } else if (start.x < end.x) {
-      var endX = (start.x - end.x).abs();
-      result.add(scaleVectoreBy(Vector2(endX, 0), scaleFactor));
-      result.add(scaleVectoreBy(Vector2(endX, wallWidth), scaleFactor));
-      result.add(scaleVectoreBy(Vector2(0, wallWidth), scaleFactor));
-    }
+    var endX = (start.x - end.x).abs();
+    result.add(scaleVectoreBy(Vector2(endX, 0), scaleFactor));
+    result.add(scaleVectoreBy(Vector2(endX, wallWidth), scaleFactor));
+    result.add(scaleVectoreBy(Vector2(0, wallWidth), scaleFactor));
     return result; //list of 4 points describing the edges of the wall
   }
 
@@ -76,5 +69,5 @@ class Wall {
   }
 
   //A wall has nothing todo, it just sits there ... it's a wall so no update
-  
+
 }

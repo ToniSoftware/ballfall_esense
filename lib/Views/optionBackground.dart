@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:ballfall/Elements/mazeBuilder.dart';
+import 'package:ballfall/Elements/wallBuilder.dart';
 import 'package:ballfall/Views/base/baseView.dart';
 import 'package:ballfall/Views/base/viewSwitchMessage.dart';
 import 'package:ballfall/Views/viewManager.dart';
@@ -22,7 +22,7 @@ class OptionBackgroundMessage {
 
 class OptionBackgroundView extends BaseView {
   bool initRequired = true;
-  MazeBuilder _mazeBuilder;
+  WallBuilder _wallBuilder;
   OptionBackgroundView(GameView view, ViewManager viewManager)
       : super(view, viewManager);
 
@@ -31,18 +31,18 @@ class OptionBackgroundView extends BaseView {
 
   @override
   void render(Canvas c) {
-    _mazeBuilder?.render(c);
+    _wallBuilder?.render(c);
   }
 
   void initMaze() {
     var savedHeight = sharedPrefs.getInt("maze_height") ?? 8;
     var savedWidth = sharedPrefs.getInt("maze_width") ?? 8;
-    _mazeBuilder = MazeBuilder(
+    _wallBuilder = WallBuilder(
       this.viewManager.game,
       height: savedHeight,
       width: savedWidth,
     );
-    _mazeBuilder.generateMaze();
+    _wallBuilder.generateMaze();
   }
 
   @override
@@ -58,7 +58,7 @@ class OptionBackgroundView extends BaseView {
       initRequired = false;
       initMaze();
     } else {
-      _mazeBuilder.resetMaze(
+      _wallBuilder.resetMaze(
         width: details.width,
         height: details.height,
       );

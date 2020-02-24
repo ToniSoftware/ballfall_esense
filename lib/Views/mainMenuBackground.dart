@@ -51,8 +51,8 @@ class MainMenuBackground extends BaseView {
 
       topWall = Wall(
         viewManager.game,
-        Vector2.zero(),
-        Vector2(screenSize.width, 0),
+        Vector2(Wall.wallWidth, 0),
+        Vector2(screenSize.width - Wall.wallWidth, 0),
       );
 
       var rightStart = Vector2(viewManager.game.screenRect.right, 0);

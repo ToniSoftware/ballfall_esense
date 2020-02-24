@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:box2d_flame/box2d.dart';
 import 'package:ballfall/Elements/ball.dart';
-import 'package:ballfall/Elements/mazeBuilder.dart';
+import 'package:ballfall/Elements/wallBuilder.dart';
 import 'package:ballfall/Elements/wall.dart';
 import 'package:ballfall/Views/base/baseView.dart';
 import 'package:ballfall/Views/viewManager.dart';
@@ -16,7 +16,7 @@ class PlayingView extends BaseView {
   Ball player;
   bool _initRequired = true;
 
-  MazeBuilder mazeBuilder;
+  WallBuilder wallBuilder;
 
   PlayingView(GameView view, ViewManager viewManager)
       : super(view, viewManager);
@@ -36,12 +36,12 @@ class PlayingView extends BaseView {
   void initMaze()  {
     var savedHeight = sharedPrefs.getInt("maze_height") ?? 8;
     var savedWidth = sharedPrefs.getInt("maze_width") ?? 8;
-    mazeBuilder = MazeBuilder(
+    wallBuilder = WallBuilder(
       this.viewManager.game,
       height: savedHeight,
       width: savedWidth,
     );
-    mazeBuilder.generateMaze();
+    wallBuilder.generateMaze();
   }
 
   @override
@@ -52,7 +52,7 @@ class PlayingView extends BaseView {
   @override
   void render(Canvas c) {
     player?.render(c);
-    mazeBuilder?.render(c);
+    wallBuilder?.render(c);
   }
 
   @override
