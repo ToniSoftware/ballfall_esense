@@ -15,20 +15,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.2"
-  async:
+  audioplayers:
     dependency: transitive
     description:
-      name: async
+      name: audioplayers
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.4.0"
-  boolean_selector:
-    dependency: transitive
+    version: "0.13.7"
+  box2d_flame:
+    dependency: "direct main"
     description:
-      name: boolean_selector
+      name: box2d_flame
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.5"
+    version: "0.4.5"
   charcode:
     dependency: transitive
     description:
@@ -64,30 +64,46 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.3"
+  esense_flutter:
+    dependency: "direct main"
+    description:
+      name: esense_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.1"
+  flame:
+    dependency: "direct main"
+    description:
+      name: flame
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.17.4"
+  flare_dart:
+    dependency: transitive
+    description:
+      name: flare_dart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.3.3"
+  flare_flutter:
+    dependency: transitive
+    description:
+      name: flare_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.8.3"
   flutter:
     dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_test:
-    dependency: "direct dev"
-    description: flutter
-    source: sdk
-    version: "0.0.0"
-  image:
+  flutter_svg:
     dependency: transitive
     description:
-      name: image
+      name: flutter_svg
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.4"
-  matcher:
-    dependency: transitive
-    description:
-      name: matcher
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.12.6"
+    version: "0.15.0"
   meta:
     dependency: transitive
     description:
@@ -95,6 +111,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.8"
+  ordered_set:
+    dependency: transitive
+    description:
+      name: ordered_set
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.5"
   path:
     dependency: transitive
     description:
@@ -102,13 +125,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.6.4"
-  pedantic:
+  path_drawing:
     dependency: transitive
     description:
-      name: pedantic
+      name: path_drawing
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.0+1"
+    version: "0.4.1"
+  path_parsing:
+    dependency: transitive
+    description:
+      name: path_parsing
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.4"
+  path_provider:
+    dependency: transitive
+    description:
+      name: path_provider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.6.1"
   petitparser:
     dependency: transitive
     description:
@@ -116,60 +153,39 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.0"
-  quiver:
+  platform:
     dependency: transitive
     description:
-      name: quiver
+      name: platform
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.5"
+    version: "2.2.1"
+  sensors:
+    dependency: "direct main"
+    description:
+      name: sensors
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.1+8"
   sky_engine:
     dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.99"
-  source_span:
+  synchronized:
     dependency: transitive
     description:
-      name: source_span
+      name: synchronized
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.5.5"
-  stack_trace:
+    version: "2.2.0"
+  tiled:
     dependency: transitive
     description:
-      name: stack_trace
+      name: tiled
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.9.3"
-  stream_channel:
-    dependency: transitive
-    description:
-      name: stream_channel
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
-  string_scanner:
-    dependency: transitive
-    description:
-      name: string_scanner
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.5"
-  term_glyph:
-    dependency: transitive
-    description:
-      name: term_glyph
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.0"
-  test_api:
-    dependency: transitive
-    description:
-      name: test_api
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.11"
+    version: "0.2.1"
   typed_data:
     dependency: transitive
     description:
@@ -177,6 +193,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.6"
+  uuid:
+    dependency: transitive
+    description:
+      name: uuid
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.4"
   vector_math:
     dependency: transitive
     description:
@@ -192,4 +215,5 @@ packages:
     source: hosted
     version: "3.5.0"
 sdks:
-  dart: ">=2.4.0 <3.0.0"
+  dart: ">=2.6.0 <3.0.0"
+  flutter: ">=1.12.13+hotfix.5 <2.0.0"

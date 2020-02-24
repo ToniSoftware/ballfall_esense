@@ -1,3 +1,26 @@
+import 'package:flame/util.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:ballfall/game.dart';
+import 'dart:async';
+import 'package:esense_flutter/esense.dart';
+
+void main() async {
+  //Make sure flame is ready before we launch our game
+  await setupFlame();
+  var game = new BallFallGame();
+  runApp(game.widget);
+}
+
+/// Setup all Flame specific parts
+Future setupFlame() async {
+  var flameUtil = Util();
+  await flameUtil.fullScreen();
+  await flameUtil.setOrientation(DeviceOrientation.portraitUp);
+}
+
+
+/*
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -109,3 +132,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+*/
