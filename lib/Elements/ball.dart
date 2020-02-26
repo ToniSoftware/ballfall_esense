@@ -9,7 +9,7 @@ class Ball {
   Body body;
   CircleShape shape;
   //Scale to get from rad/s to something in the game, I like the number 5
-  double sensorScale = 5;
+  double sensorScale = 2;
   //Draw class
   Paint paint;
   //Initial acceleration -> no movement as its (0,0)
@@ -42,6 +42,8 @@ class Ball {
     fd.shape = shape;
     body.createFixtureFromFixtureDef(fd);
     //Link to the sensor using dart Stream
+    bool leftMovement = false;
+    bool rightMovement = false;
     gyroscopeEvents.listen((GyroscopeEvent event) {
       //Adding up the scaled sensor data to the current acceleration
       if(!game.pauseGame){
