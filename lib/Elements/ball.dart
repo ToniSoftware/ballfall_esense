@@ -45,7 +45,7 @@ class Ball {
     gyroscopeEvents.listen((GyroscopeEvent event) {
       //Adding up the scaled sensor data to the current acceleration
       if(!game.pauseGame){
-        acceleration.add(Vector2(event.y / sensorScale, event.x / sensorScale));
+        acceleration.add(Vector2(event.y / sensorScale, 0 /*event.x / sensorScale*/));
       }
     });
   }
