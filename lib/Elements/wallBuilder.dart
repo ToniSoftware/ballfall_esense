@@ -49,8 +49,15 @@ class WallBuilder {
     // Wall for left
     walls.add(Wall(
         game,
-        Vector2(Wall.wallWidth, 0),
-        Vector2(Wall.wallWidth, game.screenSize.height)
+        Vector2.zero(),
+        Vector2(0, game.screenSize.height)
+    ));
+
+    // Wall for right
+    walls.add(Wall(
+        game,
+        Vector2(game.screenSize.width - Wall.wallWidth, 0),
+        Vector2(game.screenSize.width - Wall.wallWidth, game.screenSize.height)
     ));
 
 
@@ -64,14 +71,14 @@ class WallBuilder {
         // Wall before Gap
         walls.add(Wall(
           game,
-          Vector2(wall.elementAt(0).x * cellSize.width + Wall.wallWidth, dy),
+          Vector2(wall.elementAt(0).x * cellSize.width, dy),
           Vector2(wall.elementAt(0).y * cellSize.width, dy)
         ));
         // Wall after Gap
         walls.add(Wall(
           game,
           Vector2(wall.elementAt(1).x * cellSize.width, dy),
-          Vector2(wall.elementAt(1).y * cellSize.width - Wall.wallWidth, dy)
+          Vector2(wall.elementAt(1).y * cellSize.width, dy)
         ));
       }
       // Gap either at beginning or at the end

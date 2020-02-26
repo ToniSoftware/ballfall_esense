@@ -53,10 +53,17 @@ class Wall {
     //Left side corner starts at (0,0) the canvas will be moved to start point
     result.add(Vector2.zero());
     //Vertical wall if start point Y is less then end point Y other wise horizontal wall
-    var endX = (start.x - end.x).abs();
-    result.add(scaleVectoreBy(Vector2(endX, 0), scaleFactor));
-    result.add(scaleVectoreBy(Vector2(endX, wallWidth), scaleFactor));
-    result.add(scaleVectoreBy(Vector2(0, wallWidth), scaleFactor));
+    if (start.y < end.y) {
+      var endY = (start.y - end.y).abs();
+      result.add(scaleVectoreBy(Vector2(0, endY), scaleFactor));
+      result.add(scaleVectoreBy(Vector2(wallWidth, endY), scaleFactor));
+      result.add(scaleVectoreBy(Vector2(wallWidth, 0), scaleFactor));
+    } else if (start.x < end.x) {
+      var endX = (start.x - end.x).abs();
+      result.add(scaleVectoreBy(Vector2(endX, 0), scaleFactor));
+      result.add(scaleVectoreBy(Vector2(endX, wallWidth), scaleFactor));
+      result.add(scaleVectoreBy(Vector2(0, wallWidth), scaleFactor));
+    }
     return result; //list of 4 points describing the edges of the wall
   }
 
