@@ -85,8 +85,8 @@ class WallBuilder {
       else {
         walls.add(Wall(
           game,
-          Vector2(wall.elementAt(0).x * cellSize.width, dy),
-          Vector2(wall.elementAt(0).y * cellSize.width, dy)
+          Vector2(wall.elementAt(0).x * cellSize.width + Wall.wallWidth, dy),
+          Vector2(wall.elementAt(0).y * cellSize.width - Wall.wallWidth, dy)
         ));
 
       }
