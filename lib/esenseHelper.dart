@@ -18,10 +18,9 @@ class ESenseHelper {
 
   Future<void> _connectToESense() async {
     ESenseManager.connectionEvents.listen((event) {
-
       print('CONNECTION event: $event');
 
-      if(event.type == ConnectionType.connected) {
+      if (event.type == ConnectionType.connected) {
         Timer(Duration(seconds: 2), () async {
           _startListenToSensorEvents();
           connected = true;
@@ -47,12 +46,11 @@ class ESenseHelper {
       }
       // game.connectionStatus.updateStatus(_deviceStatus);
     });
-
     Timer.periodic(Duration(seconds: 4), (timer) async {
       await ESenseManager.connect(eSenseName);
 
-      await new Future.delayed(const Duration(seconds : 3));
-      if(_deviceStatus == 'device_found' || _deviceStatus == 'connected') {
+      await new Future.delayed(const Duration(seconds: 3));
+      if (_deviceStatus == 'device_found' || _deviceStatus == 'connected') {
         timer.cancel();
       }
     });
@@ -66,6 +64,5 @@ class ESenseHelper {
       gyro = double.parse(tempArray[1].toString());
     });
   }
-
 
 }

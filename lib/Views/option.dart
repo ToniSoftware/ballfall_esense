@@ -1,9 +1,10 @@
+import 'package:esense_flutter/esense.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ballfall/Views/base/baseView.dart';
 import 'package:ballfall/Views/base/viewSwitchMessage.dart';
 import 'package:ballfall/Views/optionBackground.dart';
-import 'package:ballfall/Views/soonDialog.dart';
+import 'package:ballfall/esenseHelper.dart';
 import 'package:ballfall/game.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,6 +20,7 @@ class _OptionScreenState extends State<OptionScreen> {
 
   int savedHeight = 8;
   int savedWidth = 8;
+  bool eSense = false;
 
   @override
   void initState() {
@@ -28,10 +30,11 @@ class _OptionScreenState extends State<OptionScreen> {
     loadSettings();
   }
 
-  Future loadSettings() async{
+  Future loadSettings() async {
     var prefs = await SharedPreferences.getInstance();
     savedHeight = prefs.getInt("maze_height") ?? 8;
     savedWidth = prefs.getInt("maze_width") ?? 8;
+    eSense = prefs.getBool("eSense") ?? false;
     widthController.text = savedWidth.toString();
     heightController.text = savedHeight.toString();
   }
@@ -104,7 +107,7 @@ class _OptionScreenState extends State<OptionScreen> {
                           ),
                           Expanded(
                             child: Text(
-                              "Width",
+                              "Use eSense Earables",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -132,7 +135,7 @@ class _OptionScreenState extends State<OptionScreen> {
                           ),
                           Expanded(
                             flex: 1,
-                            child: _getFormatedTextField(widthController,savedWidth),
+                            child: _getCheckbox(),
                           ),
                           Expanded(
                             flex: 2,
@@ -152,6 +155,7 @@ class _OptionScreenState extends State<OptionScreen> {
                         var prefs = await SharedPreferences.getInstance();
                         await prefs.setInt("maze_width", toInt(widthController.text,defaultValue: 8));
                         await prefs.setInt("maze_height", toInt(heightController.text,defaultValue: 8));
+                        await prefs.setBool("eSense", eSense);
                         Navigator.pop(context);
                       },
                     )
@@ -187,6 +191,23 @@ class _OptionScreenState extends State<OptionScreen> {
       onChanged: (s) => validateInput(controller, savedValue),
     );
   }
+
+  Checkbox _getCheckbox()  {
+    return Checkbox(
+      value: eSense,
+      onChanged: (bool value) async {
+        setState(() {
+        eSense = value;
+        if (eSense && !game.eSenseHelper.connected) {
+
+        } else {
+
+        }
+        });
+      },
+    );
+  }
+
 
   InputBorder _getDefaultBorder() {
     return OutlineInputBorder(

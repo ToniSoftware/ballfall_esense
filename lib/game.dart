@@ -63,6 +63,7 @@ class BallFallGame extends Game {
 
   bool pauseGame = false;
   bool blockResize = false;
+  bool eSense = false;
 
   BallFallGame({GameView startView = GameView.Playing}) {
     world = new World.withPool(
@@ -76,6 +77,7 @@ class BallFallGame extends Game {
     resize(await Flame.util.initialDimensions());
     _viewManager = ViewManager(this);
     _viewManager.changeView(startView);
+    // Initialize eSense Earables
     eSenseHelper = ESenseHelper(this);
   }
 
