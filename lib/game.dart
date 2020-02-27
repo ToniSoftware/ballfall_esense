@@ -8,6 +8,7 @@ import 'package:ballfall/Views/base/baseView.dart';
 import 'package:ballfall/Views/base/viewSwitchMessage.dart';
 import 'package:ballfall/Views/viewManager.dart';
 import 'package:wakelock/wakelock.dart';
+import 'package:ballfall/esenseHelper.dart';
 
 class GameWidget extends StatefulWidget {
   @override
@@ -57,6 +58,9 @@ class BallFallGame extends Game {
   //Handle views and transition between
   ViewManager _viewManager;
 
+  //Handle eSense earables via bluetooth
+  ESenseHelper eSenseHelper;
+
   bool pauseGame = false;
   bool blockResize = false;
 
@@ -66,12 +70,13 @@ class BallFallGame extends Game {
     initialize(startView: startView);
   }
 
-  //Initialize all things we need, devided by things need the size and things without
+  //Initialize all things we need, divided by things need the size and things without
   Future initialize({GameView startView = GameView.Playing}) async {
     //Call the resize as soon as flutter is ready
     resize(await Flame.util.initialDimensions());
     _viewManager = ViewManager(this);
     _viewManager.changeView(startView);
+    eSenseHelper = ESenseHelper(this);
   }
 
   void resize(Size size) {

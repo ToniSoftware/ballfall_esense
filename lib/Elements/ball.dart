@@ -42,8 +42,6 @@ class Ball {
     fd.shape = shape;
     body.createFixtureFromFixtureDef(fd);
     //Link to the sensor using dart Stream
-    bool leftMovement = false;
-    bool rightMovement = false;
     gyroscopeEvents.listen((GyroscopeEvent event) {
       //Adding up the scaled sensor data to the current acceleration
       if(!game.pauseGame){
