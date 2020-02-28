@@ -198,11 +198,6 @@ class _OptionScreenState extends State<OptionScreen> {
       onChanged: (bool value) async {
         setState(() {
         eSense = value;
-        if (eSense && !game.eSenseHelper.connected) {
-
-        } else {
-
-        }
         });
       },
     );

@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:ballfall/main.dart';
 import 'package:box2d_flame/box2d.dart';
 import 'package:ballfall/game.dart';
+import 'package:esense_flutter/esense.dart';
 import 'package:sensors/sensors.dart';
 
 class Ball {
@@ -51,9 +52,8 @@ class Ball {
     //Link to the sensor using dart Stream
     gyroscopeEvents.listen((GyroscopeEvent event) {
       //Adding up the scaled sensor data to the current acceleration
-      if(!game.pauseGame && !eSense){
+      if(!game.pauseGame && !eSense && !over){
         acceleration.add(Vector2(event.y / sensorScale, 0 /*event.x / sensorScale*/));
-        print("gyro acc: " + acceleration.toString());
       }
     });
   }
@@ -75,17 +75,19 @@ class Ball {
         .overlaps(Rect.fromLTWH(body.position.x * finalScale, body.position.y * finalScale, .1, .1))) {
       body.linearVelocity = Vector2.zero();
       over = true;
+      ESenseManager.disconnect();
       game.pop();
     }
   }
 
   void onESensorEvent() {
-    if (!game.pauseGame && eSense && game.eSenseHelper.connected) {
-      print((game.eSenseHelper.gyro / 1000));
-      if (acceleration.x < 1.5 && acceleration.x > -1.5) {
+    if (!game.pauseGame && eSense && game.eSenseHelper.connected && !over) {
+      if ( (acceleration.x).abs() <=1 ) {
         acceleration.add(Vector2((game.eSenseHelper.gyro / 1000), 0));
-      } else {
-        acceleration = Vector2.zero();
+      } else if (acceleration.x > 0.7) {
+        acceleration.add(Vector2(-game.eSenseHelper.gyro.abs() / 1000, 0));
+      } else if (acceleration.x < - 0.7) {
+        acceleration.add(Vector2(game.eSenseHelper.gyro.abs() / 1000, 0));
       }
       print("acceleration: " + acceleration.toString());
     }

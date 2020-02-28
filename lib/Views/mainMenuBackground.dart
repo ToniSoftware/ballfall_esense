@@ -37,12 +37,13 @@ class MainMenuBackground extends BaseView {
   void setActive({ViewSwitchMessage message}) {
     if (_initRequired) {
       var screenSize = viewManager.game.screenSize;
+      /*
       player = Ball(
           viewManager.game,
           scaleVectoreBy(
               Vector2(screenSize.width / 2, (screenSize.height / 100) * 20),
               viewManager.game.screenSize.width / viewManager.game.scale));
-
+       */
       leftWall = Wall(
         viewManager.game,
         Vector2.zero(),

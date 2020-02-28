@@ -61,7 +61,7 @@ class ESenseHelper{
 
   StreamSubscription subscription;
   void _startListenToSensorEvents() async{
-    ESenseManager.setSamplingRate(1);
+    ESenseManager.setSamplingRate(10);
     subscription = ESenseManager.sensorEvents.listen((event) {
       var temp = event.toString().substring(event.toString().indexOf(", gyro") + 9, event.toString().length);
       var tempArray = temp.split(",");
