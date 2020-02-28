@@ -3,14 +3,17 @@ import 'dart:ui';
 
 import 'package:esense_flutter/esense.dart';
 import 'package:ballfall/game.dart';
+import 'package:ballfall/Elements/ball.dart';
+import 'package:flutter/widgets.dart';
 
-class ESenseHelper {
+class ESenseHelper{
 
   final BallFallGame game;
+  Ball ball;
   bool connected = false;
   String _deviceStatus = '';
   String eSenseName = 'eSense-0569';
-  double gyro;
+  double gyro = 0;
 
   ESenseHelper(this.game) {
     _connectToESense();
@@ -58,10 +61,19 @@ class ESenseHelper {
 
   StreamSubscription subscription;
   void _startListenToSensorEvents() async{
+    ESenseManager.setSamplingRate(1);
     subscription = ESenseManager.sensorEvents.listen((event) {
       var temp = event.toString().substring(event.toString().indexOf(", gyro") + 9, event.toString().length);
       var tempArray = temp.split(",");
-      gyro = double.parse(tempArray[1].toString());
+      gyro = -double.parse(tempArray[1]);
+      if (gyro > 1000) {
+        gyro = 1000;
+      } else if (gyro < -1000) {
+        gyro = -1000;
+      }
+      if (ball != null) {
+        ball.onESensorEvent();
+      }
     });
   }
 

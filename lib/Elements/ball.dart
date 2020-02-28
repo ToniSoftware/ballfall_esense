@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:ballfall/main.dart';
 import 'package:box2d_flame/box2d.dart';
 import 'package:ballfall/game.dart';
 import 'package:sensors/sensors.dart';
@@ -10,14 +11,20 @@ class Ball {
   CircleShape shape;
   //Scale to get from rad/s to something in the game, I like the number 5
   double sensorScale = 2;
+  double eSenseScale = 1000.0;
   //Draw class
   Paint paint;
   //Initial acceleration -> no movement as its (0,0)
   Vector2 acceleration = Vector2.zero();
   double finalScale = 0;
+  //eSense Calibration
+  bool eSense = sharedPrefs.getBool("eSense") ?? false;
+  bool calibrationPhase = false;
+  bool setUp = false;
 
-  //Generate the ball and phisyc behind
+  //Generate the ball and physics behind
   Ball(this.game, Vector2 position) {
+    print("using earables: " + eSense.toString());
     finalScale = game.screenSize.width /  game.scale;
     shape = CircleShape(); //build in shape, just set the radius
     shape.p.setFrom(Vector2.zero());
@@ -44,8 +51,9 @@ class Ball {
     //Link to the sensor using dart Stream
     gyroscopeEvents.listen((GyroscopeEvent event) {
       //Adding up the scaled sensor data to the current acceleration
-      if(!game.pauseGame){
+      if(!game.pauseGame && !eSense){
         acceleration.add(Vector2(event.y / sensorScale, 0 /*event.x / sensorScale*/));
+        print("gyro acc: " + acceleration.toString());
       }
     });
   }
@@ -70,4 +78,17 @@ class Ball {
       game.pop();
     }
   }
+
+  void onESensorEvent() {
+    if (!game.pauseGame && eSense && game.eSenseHelper.connected) {
+      print((game.eSenseHelper.gyro / 1000));
+      if (acceleration.x < 1.5 && acceleration.x > -1.5) {
+        acceleration.add(Vector2((game.eSenseHelper.gyro / 1000), 0));
+      } else {
+        acceleration = Vector2.zero();
+      }
+      print("acceleration: " + acceleration.toString());
+    }
+  }
+
 }

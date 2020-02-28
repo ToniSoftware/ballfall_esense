@@ -64,11 +64,14 @@ class BallFallGame extends Game {
   bool pauseGame = false;
   bool blockResize = false;
   bool eSense = false;
+  Vector2 acceleration = Vector2.zero();
 
   BallFallGame({GameView startView = GameView.Playing}) {
     world = new World.withPool(
         _gravity, DefaultWorldPool(WORLD_POOL_SIZE, WORLD_POOL_CONTAINER_SIZE));
     initialize(startView: startView);
+    // Initialize eSense Earables
+    eSenseHelper = ESenseHelper(this);
   }
 
   //Initialize all things we need, divided by things need the size and things without
@@ -77,8 +80,6 @@ class BallFallGame extends Game {
     resize(await Flame.util.initialDimensions());
     _viewManager = ViewManager(this);
     _viewManager.changeView(startView);
-    // Initialize eSense Earables
-    eSenseHelper = ESenseHelper(this);
   }
 
   void resize(Size size) {
@@ -134,4 +135,5 @@ class BallFallGame extends Game {
   }
 
   Function() pop;
+
 }
