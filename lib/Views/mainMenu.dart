@@ -42,7 +42,11 @@ class _StartScreenState extends State<StartScreen> {
                   width: 120,
                   height: 60,
                     child: RaisedButton(
-                      child: Text("Play"),
+                      child: Text(
+                          "Play",
+                      style: TextStyle(
+                        fontSize: 25),
+                    ),
                       onPressed: () async {
                         game.pauseGame = true; //Stop anything in our background
                         await Navigator.push(
@@ -58,7 +62,10 @@ class _StartScreenState extends State<StartScreen> {
                     width: 120,
                     height: 60,
                     child: RaisedButton(
-                      child: Text("Options"),
+                      child: Text("Options",
+                        style: TextStyle(
+                            fontSize: 25),
+                      ),
                       onPressed: () async {
                         game.pauseGame = true; //Stop anything in our background
                         await Navigator.push(
@@ -73,7 +80,10 @@ class _StartScreenState extends State<StartScreen> {
                   width: 120,
                   height: 60,
                     child: RaisedButton(
-                      child: Text("How-To"),
+                      child: Text("How-To",
+                        style: TextStyle(
+                            fontSize: 25),
+                      ),
                       onPressed: () {
                         showDialog(
                             context: context,
