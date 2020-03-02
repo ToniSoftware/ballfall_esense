@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ballfall/Views/aboutDialog.dart';
+import 'package:ballfall/Views/howToDialog.dart';
 import 'package:ballfall/Views/base/baseView.dart';
 import 'package:ballfall/Views/option.dart';
 import 'package:ballfall/game.dart';
@@ -30,7 +30,7 @@ class _StartScreenState extends State<StartScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  "Maze Ball",
+                  "Ball Fall",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 30,
@@ -59,12 +59,12 @@ class _StartScreenState extends State<StartScreen> {
                       game.pauseGame = false;
                     }),
                 RaisedButton(
-                    child: Text("About"),
+                    child: Text("How-To"),
                     onPressed: () {
                       showDialog(
                           context: context,
                           builder: (BuildContext buildContext) {
-                            return AboutMazeBallDialog();
+                            return HowToDialog();
                           });
                     })
               ],
