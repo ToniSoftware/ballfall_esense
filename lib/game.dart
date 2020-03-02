@@ -51,7 +51,7 @@ class _GameWidgetState extends State<GameWidget> {
             ),
             content: Text(
                 "They are currently: " + (eSenseHelper.connected ? "connected" : "disconnected") +
-                "\nPlease go back and try again once they are connected!"
+                "\nPlease go back and try again" /*once they are connected!" */
             ),
           );
         } else if (eSenseHelper.connected) {

@@ -51,12 +51,16 @@ class Ball {
     fd.shape = shape;
     body.createFixtureFromFixtureDef(fd);
     //Link to the sensor using dart Stream
-    gyroscopeEvents.listen((GyroscopeEvent event) {
-      //Adding up the scaled sensor data to the current acceleration
-      if(!game.pauseGame && !eSense && !over){
-        acceleration.add(Vector2(event.y / sensorScale, 0 /*event.x / sensorScale*/));
-      }
-    });
+    if (!eSense) {
+      subscription = gyroscopeEvents.listen((GyroscopeEvent event) {
+        //Adding up the scaled sensor data to the current acceleration
+        if (!game.pauseGame && !eSense && !over) {
+          acceleration.add(
+              Vector2(event.y / sensorScale, 0 /*event.x / sensorScale*/));
+          print("acceleration from phone: " + acceleration.toString());
+        }
+      });
+    }
 
     //Link to the eSense earables
     if (eSense && eSenseHelper.connected) {
@@ -73,7 +77,6 @@ class Ball {
         } else if (gyro < -1000) {
           gyro = -1000;
         }
-        print("gyro: " + gyro.toString());
         onESensorEvent();
       });
     }
@@ -99,6 +102,8 @@ class Ball {
       over = true;
       if (eSense && eSenseHelper.connected) {
         subscription.cancel();
+      } else {
+        subscription.cancel();
       }
       game.pop();
     }
@@ -113,7 +118,7 @@ class Ball {
       } else if (acceleration.x < - 0.7) {
         acceleration.add(Vector2(gyro.abs() / 1000, 0));
       }
-      print("acceleration: " + acceleration.toString());
+      print("acceleration from eSense: " + acceleration.toString());
     }
   }
 
