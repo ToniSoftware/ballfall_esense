@@ -32,10 +32,6 @@ class PlayingView extends BaseView {
               viewManager.game.screenSize.width / viewManager.game.scale));
       initMaze();
     }
-    if (player != null) {
-      viewManager.game.eSenseHelper.ball = player;
-      viewManager.game.eSenseHelper.ball.acceleration = Vector2.zero();
-    }
   }
   void initMaze()  {
     var savedHeight = sharedPrefs.getInt("maze_height") ?? 8;

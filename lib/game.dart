@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:ballfall/main.dart';
 import 'package:box2d_flame/box2d.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
@@ -9,6 +10,7 @@ import 'package:ballfall/Views/base/viewSwitchMessage.dart';
 import 'package:ballfall/Views/viewManager.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:ballfall/esenseHelper.dart';
+import 'dart:async' as timer;
 
 class GameWidget extends StatefulWidget {
   @override
@@ -17,6 +19,7 @@ class GameWidget extends StatefulWidget {
 
 class _GameWidgetState extends State<GameWidget> {
   BallFallGame game;
+  bool eSense = sharedPrefs.getBool("eSense") ?? false;
 
   _GameWidgetState() {
     game = new BallFallGame();
@@ -31,12 +34,40 @@ class _GameWidgetState extends State<GameWidget> {
   }
 
   @override
+  // ignore: missing_return
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(children: <Widget>[
-        game.widget,
-      ]),
-    );
+    if (eSense) {
+        if (!eSenseHelper.connected) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(25),
+              ),
+            ),
+            title: Text(
+              "Connecting to eSense...",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 25.0),
+            ),
+            content: Text(
+                "They are currently: " + (eSenseHelper.connected ? "connected" : "disconnected") +
+                "\nPlease go back and try again once they are connected!"
+            ),
+          );
+        } else if (eSenseHelper.connected) {
+          return Scaffold(
+            body: Stack(children: <Widget>[
+              game.widget,
+            ]),
+          );
+        }
+    } else {
+      return Scaffold(
+        body: Stack(children: <Widget>[
+          game.widget,
+        ]),
+      );
+    }
   }
 }
 
@@ -70,8 +101,6 @@ class BallFallGame extends Game {
     world = new World.withPool(
         _gravity, DefaultWorldPool(WORLD_POOL_SIZE, WORLD_POOL_CONTAINER_SIZE));
     initialize(startView: startView);
-    // Initialize eSense Earables
-    eSenseHelper = ESenseHelper(this);
   }
 
   //Initialize all things we need, divided by things need the size and things without

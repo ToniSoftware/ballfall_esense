@@ -6,16 +6,14 @@ import 'package:ballfall/game.dart';
 import 'package:ballfall/Elements/ball.dart';
 import 'package:flutter/widgets.dart';
 
-class ESenseHelper{
+class ESenseHelper {
 
-  final BallFallGame game;
-  Ball ball;
   bool connected = false;
   String _deviceStatus = '';
   String eSenseName = 'eSense-0569';
   double gyro = 0;
 
-  ESenseHelper(this.game) {
+  ESenseHelper() {
     _connectToESense();
   }
 
@@ -71,9 +69,11 @@ class ESenseHelper{
       } else if (gyro < -1000) {
         gyro = -1000;
       }
+      /*
       if (ball != null) {
         ball.onESensorEvent();
       }
+       */
     });
   }
 

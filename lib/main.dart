@@ -1,3 +1,4 @@
+import 'package:ballfall/esenseHelper.dart';
 import 'package:flame/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 SharedPreferences sharedPrefs;
+ESenseHelper eSenseHelper;
 
 void main() async {
   //Make sure flame is ready before we launch our game
@@ -19,6 +21,7 @@ void main() async {
 Future setupFlame() async {
   WidgetsFlutterBinding.ensureInitialized(); //Since flutter upgrade this is required
   sharedPrefs = await SharedPreferences.getInstance();
+  eSenseHelper = new ESenseHelper();
   var flameUtil = Util();
   await flameUtil.fullScreen();
   await flameUtil.setOrientation(
