@@ -73,6 +73,7 @@ class Ball {
         } else if (gyro < -1000) {
           gyro = -1000;
         }
+        print("gyro: " + gyro.toString());
         onESensorEvent();
       });
     }
@@ -108,7 +109,7 @@ class Ball {
       if ( (acceleration.x).abs() <=1 ) {
         acceleration.add(Vector2((gyro / 1000), 0));
       } else if (acceleration.x > 0.7) {
-        acceleration.add(Vector2(gyro.abs() / 1000, 0));
+        acceleration.add(Vector2(-gyro.abs() / 1000, 0));
       } else if (acceleration.x < - 0.7) {
         acceleration.add(Vector2(gyro.abs() / 1000, 0));
       }
