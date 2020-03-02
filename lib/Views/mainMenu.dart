@@ -33,40 +33,55 @@ class _StartScreenState extends State<StartScreen> {
                   "Ball Fall",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 30,
+                      fontSize: 45,
                       letterSpacing: 6,
                       color: Colors.white),
                 ),
-                RaisedButton(
-                    child: Text("Play"),
-                    onPressed: () async {
-                      game.pauseGame = true; //Stop anything in our background
-                      await Navigator.push(
-                          context,
-                          new MaterialPageRoute(
-                              builder: (context) => GameWidget()));
-                      game.pauseGame =
-                          false; //Restart it when the screen finishes
-                    }),
-                RaisedButton(
-                    child: Text("Options"),
-                    onPressed: () async {
-                      game.pauseGame = true; //Stop anything in our background
-                      await Navigator.push(
-                          context,
-                          new MaterialPageRoute(
-                              builder: (context) => OptionScreen()));
-                      game.pauseGame = false;
-                    }),
-                RaisedButton(
-                    child: Text("How-To"),
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext buildContext) {
-                            return HowToDialog();
-                          });
-                    })
+                SizedBox(height: 5),
+                Container(
+                  width: 120,
+                  height: 60,
+                    child: RaisedButton(
+                      child: Text("Play"),
+                      onPressed: () async {
+                        game.pauseGame = true; //Stop anything in our background
+                        await Navigator.push(
+                            context,
+                            new MaterialPageRoute(
+                                builder: (context) => GameWidget()));
+                        game.pauseGame =
+                            false; //Restart it when the screen finishes
+                      })
+                ),
+                SizedBox(height: 5),
+                Container(
+                    width: 120,
+                    height: 60,
+                    child: RaisedButton(
+                      child: Text("Options"),
+                      onPressed: () async {
+                        game.pauseGame = true; //Stop anything in our background
+                        await Navigator.push(
+                            context,
+                            new MaterialPageRoute(
+                                builder: (context) => OptionScreen()));
+                        game.pauseGame = false;
+                      })
+                ),
+                SizedBox(height: 5),
+                Container(
+                  width: 120,
+                  height: 60,
+                    child: RaisedButton(
+                      child: Text("How-To"),
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext buildContext) {
+                              return HowToDialog();
+                            });
+                      })
+                  )
               ],
             ),
           ),
