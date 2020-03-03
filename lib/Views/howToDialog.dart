@@ -12,7 +12,7 @@ class HowToDialog extends StatelessWidget {
         ),
       ),
       title: Text(
-        "About Ball Fall",
+        "How-To Ball Fall",
         textAlign: TextAlign.center,
         style: TextStyle(fontWeight: FontWeight.w700, fontSize: 25.0),
       ),
